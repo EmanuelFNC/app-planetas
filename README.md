@@ -100,10 +100,6 @@ app-planetas/
 Contribuições são super bem-vindas!  
 Se você encontrar algum bug ou tiver sugestões de melhorias, por favor, abra uma _issue_ ou envie um _pull request_.
 
-## 📄 Licença
-
-Este projeto está licenciado sob a [Licença MIT](LICENSE).
-
 ---
 
-Feito com ❤️ por [Emanuel de Tarso] para o curso **Talento Tech - Paraná**.
+Feito com ❤️ por Emanuel de Tarso para o curso **Talento Tech - Paraná**.
