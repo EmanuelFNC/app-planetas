@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../controles/controle_planeta.dart';
 import '../modelos/planeta.dart';
+import '../utils/icones.dart';
 
 class TelaPlaneta extends StatefulWidget {
   final bool isAdd;
@@ -31,23 +32,24 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
   late Planeta _planeta;
 
   // Lista de ícones para seleção (do Material Design)
+  // Lista fixa de ícones que podem ser usados para planetas
   final List<IconData> _planetIcons = [
-    Icons.public,
-    Icons.home,
-    Icons.whatshot,
-    Icons.star,
-    Icons.terrain,
-    Icons.satellite,
-    Icons.rocket_launch,
-    Icons.wb_sunny,
-    Icons.brightness_2, // Lua (moon)
+    Icons.public, // Terra
+    Icons.home, // Base
+    Icons.whatshot, // Fogo / Vulcânico
+    Icons.star, // Estrela
+    Icons.terrain, // Montanhoso
+    Icons.satellite, // Satélite
+    Icons.rocket_launch, // Exploração
+    Icons.wb_sunny, // Sol
+    Icons.brightness_2, // Lua
     Icons.brightness_3, // Lua crescente
     Icons.explore, // Exploração
-    Icons.adjust, // Ajuste (pode representar órbita)
-    Icons.blur_circular, // Forma circular
-    Icons.lens, // Lente (círculo)
-    Icons.bubble_chart, // Gráfico de bolhas
-    Icons.auto_awesome, // Efeito de brilho
+    Icons.adjust, // Órbita
+    Icons.blur_circular, // Círculo / Gasoso
+    Icons.lens, // Pequeno planeta
+    Icons.bubble_chart, // Gráfico de bolhas / Atmosfera
+    Icons.auto_awesome, // Brilhante
   ];
 
   @override
@@ -144,11 +146,7 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
     // Cria o ícone do planeta. Se um ícone foi selecionado, o mostra; caso contrário, exibe "?".
     Widget avatar =
         _planeta.icone != null
-            ? Icon(
-              IconData(_planeta.icone!, fontFamily: 'MaterialIcons'),
-              size: 40,
-              color: Colors.white,
-            )
+            ? Icon(getIconData(_planeta.icone), size: 40, color: Colors.white)
             : const Text(
               '?',
               style: TextStyle(fontSize: 40, color: Colors.white),
@@ -194,7 +192,7 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
                       ),
                       const SizedBox(height: 8),
                       const Text(
-                        'Toque no para escolher um novo ícone',
+                        'Toque para escolher um novo ícone',
                         style: TextStyle(fontSize: 12),
                       ),
                     ],

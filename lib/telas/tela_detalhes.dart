@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../controles/controle_planeta.dart';
 import '../modelos/planeta.dart';
+import '../utils/icones.dart';
 import 'tela_planeta.dart';
 
 class DetalhesPlaneta extends StatelessWidget {
@@ -65,7 +66,7 @@ class DetalhesPlaneta extends StatelessWidget {
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: planeta.icone != null
                     ? Icon(
-                        IconData(planeta.icone!, fontFamily: 'MaterialIcons'),
+                        getIconData(planeta.icone),
                         size: 40,
                         color: Colors.white,
                       )

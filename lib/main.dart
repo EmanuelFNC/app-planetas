@@ -4,6 +4,7 @@ import 'controles/controle_planeta.dart';
 import 'modelos/planeta.dart';
 import 'telas/tela_detalhes.dart';
 import 'telas/tela_planeta.dart';
+import 'utils/icones.dart';
 
 void main() {
   runApp(const MyApp());
@@ -137,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: planeta.icone != null
                     ? Icon(
-                        IconData(planeta.icone!, fontFamily: 'MaterialIcons'),
+                        getIconData(planeta.icone),
                         color: Colors.white,
                       )
                     : Text(
