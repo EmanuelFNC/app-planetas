@@ -6,7 +6,7 @@ Feito como parte do curso **Talento Tech - Paraná**.
 ## 📋 Descrição
 
 O **Gerenciador de Planetas** permite:
-- **Criar:** Cadastrar novos planetas, informando nome, tamanho (em km), distância do sol (em UA) e, opcionalmente, um apelido.
+- **Criar:** Cadastrar novos planetas, informando nome, tamanho (em km), distância do sol e, opcionalmente, um apelido.
 - **Ler:** Exibir uma lista de planetas cadastrados e visualizar detalhes completos de cada um.
 - **Atualizar:** Editar os dados dos planetas.
 - **Excluir:** Remover planetas da base de dados com confirmação prévia.
