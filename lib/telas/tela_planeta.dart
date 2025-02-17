@@ -30,6 +30,26 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
 
   late Planeta _planeta;
 
+  // Lista de ícones para seleção (do Material Design)
+  final List<IconData> _planetIcons = [
+    Icons.public,
+    Icons.home,
+    Icons.whatshot,
+    Icons.star,
+    Icons.terrain,
+    Icons.satellite,
+    Icons.rocket_launch,
+    Icons.wb_sunny,
+    Icons.brightness_2, // Lua (moon)
+    Icons.brightness_3, // Lua crescente
+    Icons.explore, // Exploração
+    Icons.adjust, // Ajuste (pode representar órbita)
+    Icons.blur_circular, // Forma circular
+    Icons.lens, // Lente (círculo)
+    Icons.bubble_chart, // Gráfico de bolhas
+    Icons.auto_awesome, // Efeito de brilho
+  ];
+
   @override
   void initState() {
     _planeta = widget.planeta;
@@ -84,8 +104,56 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
     }
   }
 
+  /// Abre a BottomSheet para seleção de ícone
+  void _showIconSelector() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return GridView.builder(
+          padding: const EdgeInsets.all(16),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          itemCount: _planetIcons.length,
+          itemBuilder: (context, index) {
+            final iconData = _planetIcons[index];
+            return IconButton(
+              icon: Icon(
+                iconData,
+                size: 30,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              onPressed: () {
+                // Atualiza o planeta com o código do ícone escolhido
+                setState(() {
+                  _planeta.icone = iconData.codePoint;
+                });
+                Navigator.pop(context);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Cria o ícone do planeta. Se um ícone foi selecionado, o mostra; caso contrário, exibe "?".
+    Widget avatar =
+        _planeta.icone != null
+            ? Icon(
+              IconData(_planeta.icone!, fontFamily: 'MaterialIcons'),
+              size: 40,
+              color: Colors.white,
+            )
+            : const Text(
+              '?',
+              style: TextStyle(fontSize: 40, color: Colors.white),
+            );
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -98,37 +166,39 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              // Cabeçalho visual
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      child: Text(
-                        _nameController.text.isNotEmpty
-                            ? _nameController.text.substring(0, 1).toUpperCase()
-                            : '?',
+              // Cabeçalho visual com seletor de ícone
+              InkWell(
+                onTap: _showIconSelector,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: avatar,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.isAdd ? 'Novo Planeta' : 'Editar Planeta',
                         style: const TextStyle(
-                          fontSize: 40,
-                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.isAdd ? 'Novo Planeta' : 'Editar Planeta',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Toque no ícone para escolher um novo',
+                        style: TextStyle(fontSize: 12),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 30),

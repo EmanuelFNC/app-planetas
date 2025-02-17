@@ -57,14 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder:
-            (context) => TelaPlaneta(
-              planeta: planeta,
-              isAdd: isAdd,
-              onCompleted: () {
-                _atualizarPlanetas();
-              },
-            ),
+        builder: (context) => TelaPlaneta(
+          planeta: planeta,
+          isAdd: isAdd,
+          onCompleted: () {
+            _atualizarPlanetas();
+          },
+        ),
       ),
     );
   }
@@ -126,30 +125,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => DetalhesPlaneta(
-                          planeta: planeta,
-                          onPlanetaChanged: _atualizarPlanetas,
-                        ),
+                    builder: (context) => DetalhesPlaneta(
+                      planeta: planeta,
+                      onPlanetaChanged: _atualizarPlanetas,
+                    ),
                   ),
                 );
               },
               contentPadding: const EdgeInsets.all(16),
               leading: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Text(
-                  planeta.nome.substring(0, 1).toUpperCase(),
-                  style: const TextStyle(color: Colors.white),
-                ),
+                child: planeta.icone != null
+                    ? Icon(
+                        IconData(planeta.icone!, fontFamily: 'MaterialIcons'),
+                        color: Colors.white,
+                      )
+                    : Text(
+                        planeta.nome.substring(0, 1).toUpperCase(),
+                        style: const TextStyle(color: Colors.white),
+                      ),
               ),
               title: Text(
                 planeta.nome,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize:
-                      temApelido
-                          ? 16
-                          : 22, // Título maior se não houver apelido
+                  fontSize: temApelido ? 16 : 24,
                 ),
               ),
               subtitle: temApelido ? Text(planeta.apelido!) : null,

@@ -17,21 +17,20 @@ class DetalhesPlaneta extends StatelessWidget {
     final controle = ControlePlaneta();
     final confirm = await showDialog<bool>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Excluir Planeta'),
-            content: const Text('Tem certeza que deseja excluir este planeta?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancelar'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Excluir'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Excluir Planeta'),
+        content: const Text('Tem certeza que deseja excluir este planeta?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancelar'),
           ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Excluir'),
+          ),
+        ],
+      ),
     );
 
     if (confirm == true) {
@@ -64,20 +63,25 @@ class DetalhesPlaneta extends StatelessWidget {
               child: CircleAvatar(
                 radius: 40,
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Text(
-                  planeta.nome.substring(0, 1).toUpperCase(),
-                  style: const TextStyle(fontSize: 40, color: Colors.white),
-                ),
+                child: planeta.icone != null
+                    ? Icon(
+                        IconData(planeta.icone!, fontFamily: 'MaterialIcons'),
+                        size: 40,
+                        color: Colors.white,
+                      )
+                    : Text(
+                        planeta.nome.substring(0, 1).toUpperCase(),
+                        style:
+                            const TextStyle(fontSize: 40, color: Colors.white),
+                      ),
               ),
             ),
             const SizedBox(height: 20),
             Center(
               child: Text(
                 planeta.nome,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 30),
@@ -132,15 +136,14 @@ class DetalhesPlaneta extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => TelaPlaneta(
-                              isAdd: false,
-                              planeta: planeta,
-                              onCompleted: () {
-                                onPlanetaChanged();
-                                Navigator.of(context).pop();
-                              },
-                            ),
+                        builder: (context) => TelaPlaneta(
+                          isAdd: false,
+                          planeta: planeta,
+                          onCompleted: () {
+                            onPlanetaChanged();
+                            Navigator.of(context).pop();
+                          },
+                        ),
                       ),
                     );
                   },
@@ -148,7 +151,9 @@ class DetalhesPlaneta extends StatelessWidget {
                   label: const Text('Editar'),
                 ),
                 ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 255, 150, 143)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 172, 166),
+                  ),
                   onPressed: () => _excluirPlaneta(context),
                   icon: const Icon(Icons.delete),
                   label: const Text('Excluir'),

@@ -4,6 +4,7 @@ class Planeta {
   double tamanho;
   double distancia;
   String? apelido;
+  int? icone; // Novo campo para armazenar o codePoint do ícone
 
   // Construtor da classe Planeta
   Planeta({
@@ -12,10 +13,16 @@ class Planeta {
     required this.tamanho,
     required this.distancia,
     this.apelido,
+    this.icone,
   });
 
-  // Cosntrutor alternativo
-  Planeta.vazio() : nome = '', tamanho = 0.0, distancia = 0.0, apelido = '';
+  // Construtor alternativo
+  Planeta.vazio()
+      : nome = '',
+        tamanho = 0.0,
+        distancia = 0.0,
+        apelido = '',
+        icone = null;
 
   Map<String, dynamic> toMap() {
     return {
@@ -23,6 +30,7 @@ class Planeta {
       'tamanho': tamanho,
       'distancia': distancia,
       'apelido': apelido,
+      'icone': icone,
     };
   }
 
@@ -33,6 +41,7 @@ class Planeta {
       tamanho: map['tamanho'],
       distancia: map['distancia'],
       apelido: map['apelido'],
+      icone: map['icone'],
     );
   }
 }

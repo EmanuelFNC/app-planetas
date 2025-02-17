@@ -9,7 +9,7 @@ class ControlePlaneta {
   Future<Database> get bd async {
     if (_bd != null) return _bd!;
 
-    _bd = await _initBD('planetas.db');
+    _bd = await _initBD('planetas2.db');
     return _bd!;
   }
 
@@ -27,7 +27,8 @@ class ControlePlaneta {
         nome TEXT NOT NULL,
         tamanho REAL NOT NULL,
         distancia REAL NOT NULL,
-        apelido TEXT
+        apelido TEXT,
+        icone INTEGER
       );
     ''');
   }
