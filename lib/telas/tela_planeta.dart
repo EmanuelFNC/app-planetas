@@ -194,7 +194,7 @@ class _TelaPlanetaState extends State<TelaPlaneta> {
                       ),
                       const SizedBox(height: 8),
                       const Text(
-                        'Toque no ícone para escolher um novo',
+                        'Toque no para escolher um novo ícone',
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
